@@ -9,6 +9,7 @@ import { CircularProgress } from 'material-ui/Progress';
 import Snackbar from 'material-ui/Snackbar';
 import Typography from 'material-ui/Typography';
 import Toolbar from 'material-ui/Toolbar';
+import Grid from 'material-ui/Grid';
 
 import { PostList } from '../components/post-list';
 import { PostForm } from '../components/post-form';
@@ -49,7 +50,7 @@ export class PostContainer extends React.Component {
   addPost(post) {
     this.postService.addPost(post).subscribe((postData) => {
       this.setState({ posts: [postData, ...this.state.posts] });
-      this.showAddToast();
+      //      this.showAddToast();
     });
   }
 
@@ -67,7 +68,7 @@ export class PostContainer extends React.Component {
   }
 
   render() {
-    return (<div><AppBar position="fixed" Style="width:100%">
+    return (<div><AppBar position="fixed" style={{ width: "100%" }}>
       <Toolbar>
         <Typography type="title" color="inherit">
           Posts
@@ -75,10 +76,12 @@ export class PostContainer extends React.Component {
       </Toolbar>
     </AppBar>
 
-      <div className="flex-center-container">
+      <div style={{ paddingTop: "80px", paddingRight: "16px", paddingLeft: "16px", display: "flex" }}>
         {this.state.loaded ?
           <PostList posts={this.state.posts} />
-          : <CircularProgress className="flex-center-item" />}
+          : <CircularProgress style={{
+            margin: 'auto'
+          }} />}
       </div>
 
       <Button className="action-button"

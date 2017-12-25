@@ -10,6 +10,8 @@ import Toolbar from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import CloseIcon from 'material-ui-icons/Close';
 import Slide from 'material-ui/transitions/Slide';
+import Grid from 'material-ui/Grid';
+import Paper from 'material-ui/Paper';
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -35,52 +37,37 @@ export class PostForm extends React.Component {
         fullScreen
         transition={Transition}
         open={this.props.open}>
-        <div>
-          <AppBar>
-            <Toolbar>
-              <IconButton color="contrast" onClick={this.handleClose} aria-label="Close">
-                <CloseIcon />
-              </IconButton>
-              <Typography type="title" color="inherit" style={{ flex: 1 }}>
-                {this.props.addMode ? "Add New Post " : "Edit Post"}
-              </Typography>
-              <Button color="contrast" onClick={this.handleClose}>
-                save
+        <form onSubmit={this.handleSubmit}>
+          <div>
+            <AppBar style={{ position: 'relative' }}>
+              <Toolbar>
+                <IconButton color="contrast" onClick={this.handleClose} aria-label="Close">
+                  <CloseIcon />
+                </IconButton>
+                <Typography type="title" color="inherit" style={{ flex: 1 }}>
+                  {this.props.addMode ? "Add New Post " : "Edit Post"}
+                </Typography>
+                <Button color="contrast" type="submit" >
+                  save
               </Button>
-            </Toolbar>
-          </AppBar>
+              </Toolbar>
+            </AppBar>
 
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-control">
+            <Paper>
               <TextField
+                style={{ width: '100%' }}
                 name="title"
-                floatingLabelText="Title"
+                label="Post title"
               />
-            </div>
-
-            <div className="form-control">
               <TextField
+                multiline
+                style={{ width: '100%' }}
                 name="body"
-                multiLine
-                floatingLabelText="Write body here"
+                label="Post body"
               />
-            </div>
-            <div style={{ textAlign: 'right', padding: 8, margin: '24px -24px -24px -24px' }}>
-              <Button
-                label="Cancel"
-                primary={true}
-                onClick={this.handleClose}
-              />
-              <Button
-                type="submit"
-                label="Submit"
-                primary={true}
-              />
-
-            </div>
-          </form>
-        </div>
-
+            </Paper>
+          </div>
+        </form>
       </Dialog>
     )
   }

@@ -11,7 +11,7 @@ export class PostList extends React.Component {
       <div>
         {this.props.posts.map((post) => {
 
-          return <div key={post.id} >
+          return <div key={post.id} style={{ paddingBottom: "10px" }}>
             <Card>
               <CardContent>
                 <Typography type="headline" component="h2">
